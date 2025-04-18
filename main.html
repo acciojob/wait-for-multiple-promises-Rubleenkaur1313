@@ -3,85 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promise Results Table</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Age Validation Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <h1>Promise Results</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Promise</th>
-                <th>Time Taken (Seconds)</th>
-            </tr>
-        </thead>
-        <tbody id="output">
-            <tr>
-                <td colspan="2">Loading...</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <script>
-        // Function to create a promise that resolves after a random delay
-        function createPromise(promiseNumber) {
-            const delay = Math.random() * 2000 + 1000; // Random delay between 1 and 3 seconds
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({ promiseNumber, time: (delay / 1000).toFixed(3) }); // Resolve with time in seconds
-                }, delay);
-            });
-        }
-
-        // Create three promises
-        const promises = [
-            createPromise(1),
-            createPromise(2),
-            createPromise(3)
-        ];
-
-        // Get the output table body
-        const output = document.getElementById('output');
-
-        // Use Promise.all to wait for all promises to resolve
-        Promise.all(promises).then(results => {
-            // Remove the loading row
-            output.innerHTML = '';
-
-            // Populate the table with results
-            let totalTime = 0;
-            results.forEach(result => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>Promise ${result.promiseNumber}</td><td>${result.time}</td>`;
-                output.appendChild(row);
-                totalTime = Math.max(totalTime, parseFloat(result.time)); // Get the maximum time
-            });
-
-            // Add the total row
-            const totalRow = document.createElement('tr');
-            totalRow.innerHTML = `<td>Total</td><td>${totalTime.toFixed(3)}</td>`;
-            output.appendChild(totalRow);
-        });
-    </script>
-
+    <h1>Age Validation Form</h1>
+    <form id="age-validation-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" placeholder="Enter your age" required>
+        <br>
+        <button type="submit" id="btn">Submit</button>
+    </form>
+    <script src="script.js"></script>
 </body>
 </html>
